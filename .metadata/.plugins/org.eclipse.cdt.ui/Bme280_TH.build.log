@@ -1,0 +1,28 @@
+21:46:01 **** Incremental Build of configuration Debug for project Bme280_TH ****
+make -j2 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F072xB -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'BME280_Init':
+../Core/Src/main.c:311:40: warning: format '%X' expects argument of type 'unsigned int', but argument 3 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  311 |  sprintf(str, "Measurements status: %04X\n", value32);/*Запишем в строку считанные данные*/
+      |                                     ~~~^     ~~~~~~~
+      |                                        |     |
+      |                                        |     uint32_t {aka long unsigned int}
+      |                                        unsigned int
+      |                                     %04lX
+arm-none-eabi-gcc -o "Bme280_TH.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Video\BME_TH\Bme280_TH\STM32F072C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bme280_TH.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: Bme280_TH.elf
+ 
+arm-none-eabi-size   Bme280_TH.elf 
+arm-none-eabi-objdump -h -S  Bme280_TH.elf  > "Bme280_TH.list"
+   text	   data	    bss	    dec	    hex	filename
+  43480	    488	   1936	  45904	   b350	Bme280_TH.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objcopy  -O binary  Bme280_TH.elf  "Bme280_TH.bin"
+Finished building: Bme280_TH.list
+ 
+Finished building: Bme280_TH.bin
+ 
+
+21:46:04 Build Finished. 0 errors, 1 warnings. (took 3s.132ms)
+
